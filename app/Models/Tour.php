@@ -31,7 +31,6 @@ class Tour extends Model
         'available_to',
         'rating',
         'review_count',
-        'location',
         'slug',
     ];
 
@@ -56,5 +55,10 @@ class Tour extends Model
     public function destination()
     {
         return $this->belongsTo(Destination::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(TourImage::class);
     }
 }
