@@ -20,7 +20,10 @@ class DatabaseSeeder extends Seeder
 //            'email' => 'test@example.com',
 //        ]);
 
-        $this->call(MassiveTourSeeder::class);
+//        $this->call(MassiveTourSeeder::class);
+
+        $this->call(TravelArticleSeeder::class);
+
 
     }
 }

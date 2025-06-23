@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\DestinationResource;
 use App\Models\Destination;
 use App\Traits\ApiResponse;
-use Illuminate\Http\Request;
 
 class DestinationController extends Controller
 {
