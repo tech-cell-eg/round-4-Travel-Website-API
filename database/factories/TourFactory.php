@@ -12,6 +12,7 @@ class TourFactory extends Factory
     {
         $title = $this->faker->sentence(4);
         return [
+            'category_id' => rand(1, 10),
             'title' => $title,
             'slug' => Str::slug($title . '-' . uniqid()),
             'overview' => $this->faker->paragraph(),
