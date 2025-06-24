@@ -21,7 +21,7 @@ class TravelArticleFactory extends Factory
         return [
             'title' => $title,
             'slug' => Str::slug($title . '-' . uniqid()),
-            'image_url' => $this->faker->imageUrl(800, 600, 'nature', true),
+            'image_url' => 'articles_img/article.png',
             'content' => $this->faker->paragraphs(6, true),
             'author' => $this->faker->name(),
             'tags' => [$this->faker->word(), $this->faker->word()],

@@ -24,7 +24,9 @@ class MassiveTourSeeder extends Seeder
 
             $tours->each(function ($tour) {
                 $tour->images()->saveMany(
-                    TourImage::factory()->count(rand(2, 5))->make()
+                    TourImage::factory()->count(rand(2, 5))->make([
+                        'image_url' => 'tours_img/tour.png',
+                    ])
                 );
             });
         });

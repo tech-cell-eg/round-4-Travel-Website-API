@@ -20,7 +20,7 @@ class DestinationFactory extends Factory
         $name = $this->faker->city();
         return [
             'name' => $name,
-            'image_url' => $this->faker->imageUrl(640, 480, 'city', true, $name),
+            'image_url' => 'destinations_img/destination.png',
             'slug' => Str::slug($name),
             'description' => $this->faker->paragraph(),
             'country' => $this->faker->country(),

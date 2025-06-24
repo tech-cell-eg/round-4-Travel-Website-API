@@ -17,7 +17,7 @@ class TravelArticleResource extends JsonResource
         return [
             'slug' => $this->slug,
             'title' => $this->title,
-            'image' => $this->image_url,
+            'image' =>  asset('/storage/' . $this->image_url),
             'content' => $this->content,
             'author' => $this->author,
             'tags' => $this->tags,

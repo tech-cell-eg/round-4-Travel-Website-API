@@ -25,7 +25,12 @@ class DatabaseSeeder extends Seeder
 
 //        $this->call(TravelArticleSeeder::class);
 
-        $this->call(ActivitySeeder::class);
+        $this->call([
+            MassiveTourSeeder::class,
+            TravelArticleSeeder::class,
+            ActivitySeeder::class,
+            TestimonialSeeder::class
+        ]);
 
 
     }

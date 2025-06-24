@@ -17,7 +17,7 @@ class ActivityResource extends JsonResource
         return [
             'slug' => $this->slug,
             'title' => $this->title,
-            'image' => $this->image_url,
+            'image' =>  asset('/storage/' . $this->image_url),
 
             $this->mergeWhen(
                 $request->routeIs('activities.byDestination'),

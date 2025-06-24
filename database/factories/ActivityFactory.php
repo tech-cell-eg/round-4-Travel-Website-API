@@ -22,7 +22,7 @@ class ActivityFactory extends Factory
             'destination_id' => rand(1, 20), // ربط عشوائي بأي مكان من الـ 20
             'title' => $title,
             'slug' => Str::slug($title . '-' . uniqid()),
-            'image_url' => $this->faker->imageUrl(640, 480, 'travel', true),
+            'image_url' => 'activities_img/activity.png',
             'description' => $this->faker->paragraph(),
             'price' => $this->faker->randomFloat(2, 20, 200),
             'rating' => $this->faker->randomFloat(1, 3.5, 5.0),
