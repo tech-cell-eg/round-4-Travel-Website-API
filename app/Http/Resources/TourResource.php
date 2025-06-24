@@ -21,9 +21,11 @@ class TourResource extends JsonResource
                 'free_cancellation' => true,
             ],
             'duration' => "{$this->duration_days} Days" . ($this->duration_days > 1 ? " 1 Night" : ""),
-            'original_price' => rand(500, 1500), // وهمي – لو عندك سعر حقيقي تقدر تضيفه
+            'original_price' => rand(500, 1500),
             'discount_price' => $this->price_adult,
-            'image' => optional($this->images->first())->image_url,
+            'images' => $this->images->map(function ($image) {
+                return asset('storage/' . $image->image_url);
+            }),
         ];
     }
 }
