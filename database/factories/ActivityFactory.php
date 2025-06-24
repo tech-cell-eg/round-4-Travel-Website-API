@@ -19,7 +19,7 @@ class ActivityFactory extends Factory
     {
         $title = $this->faker->sentence(3);
         return [
-            'destination_id' => rand(1, 20), // ربط عشوائي بأي مكان من الـ 20
+            'destination_id' => rand(1, 20),
             'title' => $title,
             'slug' => Str::slug($title . '-' . uniqid()),
             'image_url' => 'activities_img/activity.png',

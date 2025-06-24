@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tours', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('destination_id')->constrained('destinations')->onDelete('cascade');
 
             $table->string('title');
