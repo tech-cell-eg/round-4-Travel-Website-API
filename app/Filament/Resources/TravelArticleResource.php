@@ -40,7 +40,7 @@ class TravelArticleResource extends Resource
 
             FileUpload::make('image_url')
                 ->image()
-                ->directory('customers_img')
+                ->directory('articles_img')
                 ->nullable(),
 
             Textarea::make('content')
