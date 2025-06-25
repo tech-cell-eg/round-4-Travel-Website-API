@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/trending-destinations', [DestinationController::class, 'trending']);
 
-Route::get('/tours', [TourController::class, 'index']);
+Route::resource('/tours', TourController::class)->only(['index', 'show']);
+
+Route::get('/categories', [TourController::class, 'categories']);
 
 Route::get('/articles', [TravelArticleController::class, 'index']);
 
