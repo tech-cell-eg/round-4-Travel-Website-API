@@ -4,6 +4,7 @@ namespace App\Filament\Widgets;
 
 namespace App\Filament\Widgets;
 
+use App\Models\Testimonial;
 use App\Models\TravelArticle;
 use App\Models\Tour;
 use App\Models\Activity;
@@ -20,7 +21,7 @@ class StatsOverview extends BaseWidget
             Card::make('Travel Articles', TravelArticle::count())
                 ->description('Total published articles')
                 ->descriptionIcon('heroicon-o-document-text')
-                ->color('info'),
+                ->color('primary'),
 
             Card::make('Tours', Tour::count())
                 ->description('Total available tours')
@@ -31,6 +32,11 @@ class StatsOverview extends BaseWidget
                 ->description('Total activities listed')
                 ->descriptionIcon('heroicon-o-light-bulb')
                 ->color('warning'),
+
+            Card::make('Testimonials', Testimonial::count())
+                ->description('Total customer testimonials')
+                ->descriptionIcon('heroicon-o-rectangle-stack')
+                ->color('info'),
         ];
     }
 }
