@@ -66,4 +66,42 @@ class Tour extends Model
     {
         return $this->hasMany(TourImage::class);
     }
+
+    public function scopeFilter($query, $filters)
+    {
+        return $query
+
+            ->when(isset($filters['type']), function ($q) use ($filters) {
+                $q->whereHas('category', function ($q2) use ($filters) {
+                    $q2->where('slug', $filters['type']);
+                });
+            })
+
+            ->when(isset($filters['destination']), function ($q) use ($filters) {
+                $q->whereHas('destination', function ($q2) use ($filters) {
+                    $q2->where('slug', $filters['destination']);
+                });
+            })
+
+            ->when(isset($filters['price_min']), fn($q) =>
+            $q->where('price_adult', '>=', $filters['price_min'])
+            )
+
+            ->when(isset($filters['price_max']), fn($q) =>
+            $q->where('price_adult', '<=', $filters['price_max'])
+            )
+
+            ->when(isset($filters['duration']), fn($q) =>
+            $q->where('duration_days', $filters['duration'])
+            )
+
+            ->when(isset($filters['language']), fn($q) =>
+            $q->whereJsonContains('languages', $filters['language'])
+            )
+
+            ->when(isset($filters['rating']), fn($q) =>
+            $q->where('rating', '>=', $filters['rating'])
+            );
+    }
+
 }

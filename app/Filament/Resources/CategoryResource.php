@@ -2,48 +2,44 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\DestinationResource\Pages;
-use App\Filament\Resources\DestinationResource\RelationManagers;
-use App\Models\Destination;
+use App\Filament\Resources\CategoryResource\Pages;
+use App\Filament\Resources\CategoryResource\RelationManagers;
+use App\Models\Category;
 use Filament\Forms;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class DestinationResource extends Resource
+class CategoryResource extends Resource
 {
-    protected static ?string $model = Destination::class;
+    protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-map';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
+
     public static function form(Form $form): Form
     {
         return $form->schema([
             TextInput::make('name')
                 ->required()
-                ->unique(ignoreRecord: true),
+                ->unique(ignoreRecord: true)
+                ->live(onBlur: true),
 
             TextInput::make('slug')
                 ->required()
-                ->unique(ignoreRecord: true),
+                ->unique(ignoreRecord: true)
+                ->disabled()
+                ->dehydrated(),
 
-            FileUpload::make('image_url')
-                ->image()
-                ->directory('destinations_img')
-                ->visibility('public'),
-
-            Textarea::make('description')
-                ->rows(3),
-
-            TextInput::make('country'),
-            TextInput::make('city'),
+            Toggle::make('is_active')
+                ->label('Active')
+                ->default(true),
         ]);
     }
 
@@ -51,11 +47,9 @@ class DestinationResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->searchable()->sortable(),
+                TextColumn::make('name')->sortable()->searchable(),
                 TextColumn::make('slug')->copyable(),
-                ImageColumn::make('image_url')->circular(),
-                TextColumn::make('country'),
-                TextColumn::make('city'),
+                BooleanColumn::make('is_active')->label('Active'),
                 TextColumn::make('created_at')->dateTime()->label('Created'),
             ])
             ->filters([
@@ -81,9 +75,9 @@ class DestinationResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDestinations::route('/'),
-            'create' => Pages\CreateDestination::route('/create'),
-            'edit' => Pages\EditDestination::route('/{record}/edit'),
+            'index' => Pages\ListCategories::route('/'),
+            'create' => Pages\CreateCategory::route('/create'),
+            'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
     }
 }
